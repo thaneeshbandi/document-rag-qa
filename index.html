@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Document Q&amp;A (RAG)</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 760px; margin: 30px auto; padding: 0 16px; color: #222; }
+    section { border: 1px solid #ddd; border-radius: 6px; padding: 16px; margin-bottom: 20px; }
+    h2 { margin-top: 0; font-size: 18px; }
+    input[type=text] { width: 100%; padding: 8px; box-sizing: border-box; margin-bottom: 8px; }
+    button { padding: 8px 16px; cursor: pointer; }
+    .box { background: #f6f6f6; padding: 10px; border-radius: 4px; white-space: pre-wrap; margin-top: 8px; }
+    .error { color: #b00020; }
+    .chunk { font-size: 13px; color: #555; border-left: 3px solid #ccc; padding-left: 8px; margin: 8px 0; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Document Question Answering</h1>
+  <p>Upload PDF, DOCX, CSV, XLSX, TXT or JSON files, then ask questions about them.</p>
+
+  <section>
+    <h2>1. Upload documents</h2>
+    <input type="file" id="fileInput" multiple accept=".pdf,.docx,.csv,.xlsx,.txt,.json">
+    <button onclick="uploadFiles()">Upload</button>
+    <div id="uploadStatus" class="box">No upload yet.</div>
+  </section>
+
+  <section>
+    <h2>2. Ask a question</h2>
+    <input type="text" id="questionInput" placeholder="e.g. What is RAG?"
+           onkeydown="if (event.key === 'Enter') askQuestion()">
+    <button onclick="askQuestion()">Ask</button>
+
+    <h3>Answer</h3>
+    <div id="answer" class="box">-</div>
+
+    <h3>Sources</h3>
+    <div id="sources" class="box">-</div>
+
+    <details>
+      <summary>Retrieved chunks</summary>
+      <div id="chunks"></div>
+    </details>
+  </section>
+
+  <script>
+    async function uploadFiles() {
+      const files = document.getElementById("fileInput").files;
+      const status = document.getElementById("uploadStatus");
+      if (files.length === 0) {
+        status.innerHTML = '<span class="error">Please choose at least one file.</span>';
+        return;
+      }
+
+      const formData = new FormData();
+      for (const file of files) {
+        formData.append("files", file);
+      }
+
+      status.textContent = "Uploading and indexing... (this can take a few seconds)";
+      const response = await fetch("/upload", { method: "POST", body: formData });
+      const data = await response.json();
+
+      if (!response.ok) {
+        status.innerHTML = '<span class="error"></span>';
+        status.firstChild.textContent = "Error: " + data.detail;
+        return;
+      }
+      status.textContent = data.message;
+      if (data.errors.length > 0) {
+        status.textContent += "\nSkipped: " + data.errors.join("\n");
+      }
+    }
+
+    async function askQuestion() {
+      const question = document.getElementById("questionInput").value;
+      const answerBox = document.getElementById("answer");
+      const sourcesBox = document.getElementById("sources");
+      const chunksBox = document.getElementById("chunks");
+
+      answerBox.textContent = "Thinking...";
+      sourcesBox.textContent = "-";
+      chunksBox.innerHTML = "";
+
+      const response = await fetch("/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: question })
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        answerBox.innerHTML = '<span class="error"></span>';
+        answerBox.firstChild.textContent = "Error: " + data.detail;
+        return;
+      }
+
+      answerBox.textContent = data.answer;
+      sourcesBox.textContent = data.sources.length > 0 ? data.sources.join("\n") : "No sources used.";
+
+      for (const chunk of data.chunks) {
+        const div = document.createElement("div");
+        div.className = "chunk";
+        div.textContent = `[${chunk.source} | similarity ${chunk.score}]\n${chunk.text}`;
+        chunksBox.appendChild(div);
+      }
+    }
+  </script>
+</body>
+</html>

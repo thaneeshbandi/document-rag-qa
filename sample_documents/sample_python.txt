@@ -1,0 +1,13 @@
+Python Programming Basics
+
+Python is a high-level, general-purpose programming language created by Guido van Rossum and first released in 1991. Its design philosophy emphasizes code readability, and it uses indentation (whitespace) to define code blocks instead of curly braces.
+
+Python is dynamically typed, which means you do not need to declare the type of a variable. The interpreter works out the type while the program runs.
+
+Common built-in data types in Python are int, float, str, bool, list, tuple, dict and set. Lists are mutable ordered collections, tuples are immutable ordered collections, and dictionaries store key-value pairs.
+
+A virtual environment is an isolated folder that holds a specific Python version and its installed packages. It is created with the command "python -m venv .venv". Virtual environments stop the packages of one project from conflicting with another project.
+
+pip is the standard package installer for Python. The command "pip install -r requirements.txt" installs every package listed in a requirements file.
+
+FastAPI is a modern Python web framework for building APIs. It uses Python type hints to validate request data and automatically generates interactive API documentation at the /docs URL.

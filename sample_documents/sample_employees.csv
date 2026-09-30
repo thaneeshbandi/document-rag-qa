@@ -1,0 +1,6 @@
+employee_id,name,department,role,office_city
+E101,Asha Rao,Engineering,Backend Developer,Hyderabad
+E102,Daniel Kim,Engineering,ML Engineer,Seattle
+E103,Priya Nair,Data Science,Data Analyst,Bengaluru
+E104,Marco Silva,Operations,DevOps Engineer,Lisbon
+E105,Lena Fischer,Product,Product Manager,Berlin

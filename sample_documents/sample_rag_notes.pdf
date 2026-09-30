@@ -1,0 +1,112 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 1941 >>
+stream
+BT
+72 740 Td
+/F1 16 Tf
+(Retrieval-Augmented Generation \(RAG\) - Study Notes) Tj
+0 -22 Td
+/F1 11 Tf
+() Tj
+0 -17 Td
+/F1 13 Tf
+(What is RAG?) Tj
+0 -19 Td
+/F1 11 Tf
+(Retrieval-Augmented Generation \(RAG\) is a technique that gives a large language) Tj
+0 -17 Td
+/F1 11 Tf
+(model relevant information from external documents before it answers. Instead of) Tj
+0 -17 Td
+/F1 11 Tf
+(relying only on what it learned during training, the model reads retrieved text) Tj
+0 -17 Td
+/F1 11 Tf
+(and uses it as context. RAG was introduced by Patrick Lewis and colleagues at) Tj
+0 -17 Td
+/F1 11 Tf
+(Facebook AI Research in a 2020 paper.) Tj
+0 -17 Td
+/F1 11 Tf
+() Tj
+0 -17 Td
+/F1 13 Tf
+(The three stages of RAG) Tj
+0 -19 Td
+/F1 11 Tf
+(1. Indexing: documents are split into chunks, each chunk is converted into an) Tj
+0 -17 Td
+/F1 11 Tf
+(   embedding vector, and the vectors are stored in a vector index such as FAISS.) Tj
+0 -17 Td
+/F1 11 Tf
+(2. Retrieval: the user question is embedded with the same model and the most) Tj
+0 -17 Td
+/F1 11 Tf
+(   similar chunks are found using similarity search.) Tj
+0 -17 Td
+/F1 11 Tf
+(3. Generation: the retrieved chunks are added to the prompt and the LLM writes) Tj
+0 -17 Td
+/F1 11 Tf
+(   an answer grounded in that context.) Tj
+0 -17 Td
+/F1 11 Tf
+() Tj
+0 -17 Td
+/F1 13 Tf
+(Why use RAG?) Tj
+0 -19 Td
+/F1 11 Tf
+(RAG lets a model answer questions about private or recent documents without) Tj
+0 -17 Td
+/F1 11 Tf
+(retraining, reduces hallucinations, and makes it possible to show the sources) Tj
+0 -17 Td
+/F1 11 Tf
+(that an answer was based on.) Tj
+0 -17 Td
+/F1 11 Tf
+() Tj
+0 -17 Td
+/F1 13 Tf
+(What is FAISS?) Tj
+0 -19 Td
+/F1 11 Tf
+(FAISS \(Facebook AI Similarity Search\) is an open-source library developed by Meta) Tj
+0 -17 Td
+/F1 11 Tf
+(for efficient similarity search over dense vectors. An IndexFlatIP index compares) Tj
+0 -17 Td
+/F1 11 Tf
+(a query vector with every stored vector using the inner product.) Tj
+0 -17 Td
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000002234 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2331
+%%EOF
