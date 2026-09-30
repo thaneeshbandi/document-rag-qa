@@ -10,3 +10,5 @@ data/
 faiss_store/
 
 .DS_Store
+
+INTERVIEW_NOTES.md
